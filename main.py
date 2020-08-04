@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import os
 from flask import Flask, request
 import tweepy
-from twitter_scraper import get_tweets
+import twint
 
 
 app = Flask(__name__)
@@ -25,20 +25,13 @@ def tweet():
 @app.route("/getUserTweets")
 def getTweets():
     user = request.args.get('user')
-    file1 = open(user + ".txt", "w")
-    print("Writing to " + user +".txt")
-    for tweet in get_tweets(user, pages=50000):
-        if tweet and not tweet['isRetweet'] and not tweet['isPinned']:
-            if "https://twitter.com" in tweet['text']:
-                arr = tweet['text'].split("https://twitter.com")
-                file1.write(arr[0] + "\n")
-            elif "pic.twitter.com" in tweet['text']:
-                arr = tweet['text'].split("pic.twitter.com")
-                file1.write(arr[0] + "\n")
-            else:
-                file1.write(tweet['text'] + "\n")
-    file1.close()
-    return "Tweets saved on " + user + ".txt"
+    c = twint.Config()
+    c.Username = user
+    c.Hide_output = True
+    c.Store_csv = True
+    c.Output = user + ".csv"
+    twint.run.Search(c)
+    return "Tweets saved on " + user + ".csv"
 
 
 if __name__ == '__main__':
