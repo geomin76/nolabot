@@ -14,10 +14,10 @@ click==7.1.2
 cssselect==1.1.0
 elasticsearch==7.8.0
 fake-useragent==0.1.11
-fire==0.3.1
 Flask==1.1.2
 geographiclib==1.50
 geopy==2.0.0
+googletransx==2.4.2
 idna==2.10
 idna-ssl==1.1.0
 itsdangerous==1.1.0
@@ -45,12 +45,11 @@ schedule==0.6.0
 six==1.15.0
 soupsieve==2.0.1
 termcolor==1.1.0
-tqdm==4.48.0
 tweepy==3.9.0
-twint==2.1.4
-twitter-scraper==0.4.4
+twint==2.1.20
 typing==3.7.4.3
 typing-extensions==3.7.4.2
+Unidecode==1.1.1
 urllib3==1.25.10
 w3lib==1.22.0
 websockets==8.1
