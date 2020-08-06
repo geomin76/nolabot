@@ -7,6 +7,10 @@ import twint
 import logging
 import re
 import service
+import tensorflow as tf
+import numpy as np
+import os
+import time
 
 logging.basicConfig(
     level=logging.INFO,
@@ -53,6 +57,14 @@ def getTweets():
     file1.close()
     return "Tweets saved on " + user + ".txt"
 
+@app.route("/generate")
+def generate():
+    # path_to_file = tf.keras.utils.get_file('eggsand_toast.txt', './eggsand_toast.txt')
+    text = open('./eggsand_toast.txt', 'rb').read().decode(encoding='utf-8')
+    print ('Length of text: {} characters'.format(len(text)))
+    vocab = sorted(set(text))
+    # print ('{} unique characters'.format(len(vocab)))
+    return ('{} unique characters'.format(len(vocab)))
 
 
 if __name__ == '__main__':
