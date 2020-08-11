@@ -7,10 +7,7 @@ import twint
 import logging
 import re
 import service
-import tensorflow as tf
-import numpy as np
-import os
-import time
+import keras
 
 logging.basicConfig(
     level=logging.INFO,
@@ -57,20 +54,17 @@ def getTweets():
     file1.close()
     return "Tweets saved on " + user + ".txt"
 
+
+from textgenrnn import textgenrnn
+from datetime import datetime
+
 @app.route("/generate")
 def generate():
-    # path_to_file = tf.keras.utils.get_file('eggsand_toast.txt', './eggsand_toast.txt')
-    text = open('./eggsand_toast.txt', 'rb').read().decode(encoding='utf-8')
-    print ('Length of text: {} characters'.format(len(text)))
-
-    # Grabbing the unique characters in this text
-    vocab = sorted(set(text))
-
-    # Mapping every string to a numerical representation
-    char2idx = {u:i for i, u in enumerate(vocab)}
-    idx2char = np.array(vocab)
-
-    text_as_int = np.array([char2idx[c] for c in text])
+    startTime = datetime.now()
+    textgen = textgenrnn()
+    textgen.train_from_file('eggsand_toast.txt', num_epochs=10)
+    textgen.generate()
+    print(datetime.now() - startTime)
     return "hello"
 
 
