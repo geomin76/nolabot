@@ -62,11 +62,15 @@ from datetime import datetime
 def generate():
     startTime = datetime.now()
     textgen = textgenrnn()
-    textgen.train_from_file('eggsand_toast.txt', num_epochs=10)
+    textgen.train_from_file('marchahmadness.txt', num_epochs=10)
     textgen.generate()
     print(datetime.now() - startTime)
     return "hello"
 
+@app.route("/generateFromTrained")
+def generateFromTrained():
+    textgen_2 = textgenrnn('lexi_textgenrnn_weights.hdf5')
+    textgen_2.generate(3, temperature=1.0)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
