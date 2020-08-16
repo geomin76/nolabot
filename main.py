@@ -8,6 +8,9 @@ import logging
 import re
 import service
 import keras
+from twilio.rest import Client
+from textgenrnn import textgenrnn
+from datetime import datetime
 
 logging.basicConfig(
     level=logging.INFO,
@@ -17,6 +20,8 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+client = Client(os.environ.get('PHONE_KEY'), os.environ.get('PHONE_SECRET'))
 
 app = Flask(__name__)
 
@@ -54,10 +59,6 @@ def getTweets():
     file1.close()
     return "Tweets saved on " + user + ".txt"
 
-
-from textgenrnn import textgenrnn
-from datetime import datetime
-
 @app.route("/generate")
 def generate():
     startTime = datetime.now()
@@ -72,6 +73,13 @@ def generateFromTrained():
     textgen_2 = textgenrnn('ahmad_textgenrnn_weights.hdf5')
     textgen_2.generate(10, temperature=0.5)
     return "Returned"
+
+@app.route("/text")
+def text():
+    client.messages.create(to=os.environ.get('MY_NUMBER'), 
+                       from_=os.environ.get('TWILIO_NUMBER'), 
+                       body="Hello from Python!")
+    return "text"
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
