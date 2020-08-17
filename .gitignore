@@ -4,3 +4,4 @@ __pycache__/
 *.txt
 debug.log
 *.hdf5
+*.json

@@ -4,7 +4,6 @@ import os
 from flask import Flask, request
 import tweepy
 import twint
-import logging
 import re
 import service
 import keras
@@ -13,14 +12,6 @@ from twilio import twiml
 from textgenrnn import textgenrnn
 from datetime import datetime
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler("debug.log"),
-        logging.StreamHandler()
-    ]
-)
 
 client = Client(os.environ.get('PHONE_KEY'), os.environ.get('PHONE_SECRET'))
 
@@ -42,22 +33,8 @@ def tweet():
 
 @app.route("/getUserTweets")
 def getTweets():
-    tweets = []
     user = request.args.get('user')
-    c = twint.Config()
-    c.Username = user
-    c.Hide_output = True
-    c.Store_object = True
-    c.Store_object_tweets_list = tweets
-    logging.info("Searching tweets for " + user)
-    twint.run.Search(c)
-    logging.info("Saving tweets to " + user + ".txt file")
-    file1 = open(user + ".txt", "w")
-    for i in tweets:
-        parsedStr = service.parsingString(i.tweet)
-        if parsedStr.strip():
-            file1.write(parsedStr + "\n")
-    file1.close()
+    service.getTweetsHelper(user)
     return "Tweets saved on " + user + ".txt"
 
 @app.route("/generate")
