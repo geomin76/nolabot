@@ -9,6 +9,7 @@ import re
 import service
 import keras
 from twilio.rest import Client
+from twilio import twiml
 from textgenrnn import textgenrnn
 from datetime import datetime
 
@@ -63,7 +64,7 @@ def getTweets():
 def generate():
     startTime = datetime.now()
     textgen = textgenrnn()
-    textgen.train_from_file('marchahmadness.txt', num_epochs=30)
+    textgen.train_from_file('marchahmadness.txt', new_model=True, num_epochs=30, gen_epochs=5, word_level=True)
     textgen.generate()
     print(datetime.now() - startTime)
     return "hello"
@@ -74,12 +75,19 @@ def generateFromTrained():
     textgen_2.generate(10, temperature=0.5)
     return "Returned"
 
-@app.route("/text")
-def text():
+@app.route("/sendText")
+def sendText():
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
-                       body="Hello from Python!")
+                       body="Hello fucker!")
     return "text"
+
+@app.route("/getText", methods=['POST'])
+def getText():
+    message_body = request.form['BODY']
+    resp = twiml.Response()
+    resp.message(message_body)
+    return str(resp)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
