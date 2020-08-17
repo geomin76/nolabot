@@ -12,7 +12,7 @@ from twilio import twiml
 from textgenrnn import textgenrnn
 from datetime import datetime
 
-
+# authentication for Twilio
 client = Client(os.environ.get('PHONE_KEY'), os.environ.get('PHONE_SECRET'))
 
 app = Flask(__name__)
@@ -56,7 +56,7 @@ def generateFromTrained():
 def sendText():
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
-                       body="Hello fucker!")
+                       body="Hello!")
     return "text"
 
 @app.route("/getText", methods=['POST'])
