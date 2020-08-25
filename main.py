@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 import os
 from flask import Flask, request
 import tweepy
@@ -12,10 +11,10 @@ from twilio import twiml
 from textgenrnn import textgenrnn
 from datetime import datetime
 
+app = Flask(__name__)
+
 # authentication for Twilio
 client = Client(os.environ.get('PHONE_KEY'), os.environ.get('PHONE_SECRET'))
-
-app = Flask(__name__)
 
 # authentication for twitter
 auth = tweepy.OAuthHandler(os.environ.get('KEY'), os.environ.get('SECRET'))
