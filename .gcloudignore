@@ -1,8 +1,0 @@
-venv/
-__pycache__/
-*.csv
-eggsand_toast.txt
-marchahmadness.txt
-debug.log
-*.hdf5
-*.json
