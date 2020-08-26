@@ -40,15 +40,17 @@ def getTweets():
 def generate():
     startTime = datetime.now()
     textgen = textgenrnn()
-    textgen.train_from_file('marchahmadness.txt', new_model=True, num_epochs=30, gen_epochs=5, word_level=True)
+    textgen.train_from_file('marchahmadness.txt', new_model=True, num_epochs=300, gen_epochs=50, word_level=True)
     textgen.generate()
     print(datetime.now() - startTime)
     return "hello"
 
 @app.route("/generateFromTrained")
 def generateFromTrained():
-    textgen_2 = textgenrnn('ahmad_textgenrnn_weights.hdf5')
-    textgen_2.generate(10, temperature=0.5)
+    textgen_2 = textgenrnn(weights_path='ahmad_textgenrnn_weights.hdf5',
+                       vocab_path='ahmad_textgenrnn_vocab.json',
+                       config_path='ahmad_textgenrnn_config.json')
+    textgen_2.generate(10, temperature=1.0)
     return "Returned"
 
 @app.route("/sendText")
