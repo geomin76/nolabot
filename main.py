@@ -19,7 +19,7 @@ logging.basicConfig(
 
 app = Flask(__name__)
 
-# authentication for twitter
+# authentication for twitter using env variables
 auth = tweepy.OAuthHandler(os.environ.get('KEY'), os.environ.get('SECRET'))
 auth.set_access_token(os.environ.get('TOKEN'), os.environ.get('TOKEN_SECRET'))
 api = tweepy.API(auth)
