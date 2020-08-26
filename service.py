@@ -1,4 +1,5 @@
 import re
+import twint
 
 def parsingString(string):
     emoji_pattern = re.compile("["
@@ -28,3 +29,20 @@ def parsingString(string):
     parsedStr = re.sub(r'@[\w]*', '', parsedStr)
     parsedStr = re.sub(r'…', '', parsedStr)
     return parsedStr
+
+def getTweetsHelper(user):
+    tweets = []
+    c = twint.Config()
+    c.Username = user
+    c.Hide_output = True
+    c.Store_object = True
+    c.Store_object_tweets_list = tweets
+    print("Searching tweets for " + user)
+    twint.run.Search(c)
+    print("Saving tweets to " + user + ".txt file")
+    file1 = open(user + ".txt", "w")
+    for i in tweets:
+        parsedStr = parsingString(i.tweet)
+        if parsedStr.strip():
+            file1.write(parsedStr + "\n")
+    file1.close()
