@@ -43,7 +43,7 @@ def generate():
     textgen.train_from_file('marchahmadness.txt', new_model=True, num_epochs=300, gen_epochs=50, word_level=True)
     textgen.generate()
     print(datetime.now() - startTime)
-    return "hello"
+    return "Generated tweets"
 
 @app.route("/generateFromTrained")
 def generateFromTrained():
