@@ -8,8 +8,10 @@ import service
 import keras
 from twilio.rest import Client
 from twilio import twiml
-from textgenrnn import textgenrnn
 from datetime import datetime
+import sys
+sys.path.append('./textgenrnn')
+from textgenrnn import textgenrnn
 
 app = Flask(__name__)
 
@@ -69,3 +71,6 @@ def getText():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
+
+
+# WHAT IF you had textgenrnn.py files internally instead of install, so you can change that 14th line and get it working
