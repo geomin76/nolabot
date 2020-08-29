@@ -64,13 +64,14 @@ def sendText():
 
 @app.route("/getText", methods=['POST'])
 def getText():
+    number = request.form['From']
     message_body = request.form['BODY']
     resp = twiml.Response()
     resp.message(message_body)
+    print(str(number))
+    print(str(message_body))
+    print(str(resp))
     return str(resp)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
-
-
-# WHAT IF you had textgenrnn.py files internally instead of install, so you can change that 14th line and get it working
