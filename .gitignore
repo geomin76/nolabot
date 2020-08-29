@@ -4,5 +4,5 @@ __pycache__/
 eggsand_toast.txt
 marchahmadness.txt
 debug.log
-*.hdf5
-*.json
+ahmad_textgenrnn_weights.hdf5
+lexi_textgenrnn_weights.hdf5
