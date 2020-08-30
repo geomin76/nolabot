@@ -60,7 +60,7 @@ def generateFromTrained():
 def sendText():
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
-                       body="Hello!")
+                       body="Welcome to Nolabot!")
     return "text"
 
 @app.route("/sms", methods=['GET', 'POST'])
@@ -70,8 +70,8 @@ def sms():
     print(str(number))
     print(str(message_body))
     resp = MessagingResponse()
-
-    resp.message("The Robots are coming! Head for the hills!")
+    resp.media("https://lh3.googleusercontent.com/gq5MtvoDPqkkfW12QmxT8zmP0HuyluaxG_UvPa3A67RYo1j67rukrNjiSMk9s3bYIWxNVW7gNXdGKO6_OhaVCXsnnwBtW5faQjZOohZ4G5MMbDDAA7Ee9WIWRResbTK6Jjfff9b5IUI=w2400")
+    resp.message("Thanks for texting nolabot! Cheers!")
     print(str(resp))
     return str(resp)
 
