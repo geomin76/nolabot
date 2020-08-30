@@ -70,8 +70,8 @@ def sms():
     print(str(number))
     print(str(message_body))
     resp = MessagingResponse()
-    resp.media("https://lh3.googleusercontent.com/gq5MtvoDPqkkfW12QmxT8zmP0HuyluaxG_UvPa3A67RYo1j67rukrNjiSMk9s3bYIWxNVW7gNXdGKO6_OhaVCXsnnwBtW5faQjZOohZ4G5MMbDDAA7Ee9WIWRResbTK6Jjfff9b5IUI=w2400")
     resp.message("Thanks for texting nolabot! Cheers!")
+    resp.media("https://lh3.googleusercontent.com/gq5MtvoDPqkkfW12QmxT8zmP0HuyluaxG_UvPa3A67RYo1j67rukrNjiSMk9s3bYIWxNVW7gNXdGKO6_OhaVCXsnnwBtW5faQjZOohZ4G5MMbDDAA7Ee9WIWRResbTK6Jjfff9b5IUI=w2400")
     print(str(resp))
     return str(resp)
 
