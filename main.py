@@ -62,7 +62,7 @@ def sendText():
                        body="Hello!")
     return "text"
 
-@app.route("/getText", methods=['POST'])
+@app.route("/sms", methods=['GET', 'POST'])
 def getText():
     number = request.form['From']
     message_body = request.form['BODY']
