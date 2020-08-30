@@ -65,7 +65,7 @@ def sendText():
 @app.route("/sms", methods=['GET', 'POST'])
 def getText():
     number = request.form['From']
-    message_body = request.form['BODY']
+    message_body = request.form['Body']
     resp = twiml.Response()
     resp.message(message_body)
     print(str(number))
