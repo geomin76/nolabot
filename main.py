@@ -9,6 +9,7 @@ import keras
 from twilio.rest import Client
 from twilio import twiml
 from datetime import datetime
+from twilio.twiml.messaging_response import MessagingResponse
 import sys
 sys.path.append('./textgenrnn')
 from textgenrnn import textgenrnn
@@ -63,13 +64,14 @@ def sendText():
     return "text"
 
 @app.route("/sms", methods=['GET', 'POST'])
-def getText():
+def sms():
     number = request.form['From']
     message_body = request.form['Body']
-    resp = twiml.Response()
-    resp.message(message_body)
     print(str(number))
     print(str(message_body))
+    resp = MessagingResponse()
+
+    resp.message("The Robots are coming! Head for the hills!")
     print(str(resp))
     return str(resp)
 
