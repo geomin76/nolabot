@@ -20,8 +20,7 @@ from textgenrnn import textgenrnn
     # find ahmad's best tweets and build with everyone elses? danya, lexi, sparsh, becca, ahmad
     # build model with everyone and possible non-level, but we will see
 # random image of nola return too
-# cron job for flow
-# devops pls
+# cron job for flow (at end)
 
 app = Flask(__name__)
 
@@ -59,6 +58,7 @@ def generate():
 
 @app.route("/generateFromTrained")
 def generateFromTrained():
+    # somehow rewrite textgenrnn to print to list and return instead of print to console
     textgen_2 = textgenrnn(weights_path='ahmad_textgenrnn_weights.hdf5',
                        vocab_path='ahmad_textgenrnn_vocab.json',
                        config_path='ahmad_textgenrnn_config.json')
