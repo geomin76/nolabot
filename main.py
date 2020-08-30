@@ -14,6 +14,15 @@ import sys
 sys.path.append('./textgenrnn')
 from textgenrnn import textgenrnn
 
+# do some form of checking for numbers, so no random number will text, database?
+# random function to text a number for every tweet
+# rebuild model, trying to include everyone? find best way to build model
+    # find ahmad's best tweets and build with everyone elses? danya, lexi, sparsh, becca, ahmad
+    # build model with everyone and possible non-level, but we will see
+# random image of nola return too
+# cron job for flow
+# devops pls
+
 app = Flask(__name__)
 
 # authentication for Twilio
