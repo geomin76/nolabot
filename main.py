@@ -15,11 +15,20 @@ sys.path.append('./textgenrnn')
 from textgenrnn import textgenrnn
 
 # do some form of checking for numbers, so no random number will text, database?
-# random function to text a number for every tweet
+    # in a record, do a bunch of random numbers? and then pick one
+    # and in another record, store that number every tweet push, so it can only recognize that number? and if another person tries to reply, "sorry not your turn"
+# pay for actual subscription   
+#random function to text a number for every tweet
+
 # rebuild model, trying to include everyone? find best way to build model
     # find ahmad's best tweets and build with everyone elses? danya, lexi, sparsh, becca, ahmad
-    # build model with everyone and possible non-level, but we will see
+    # build model with everyone and possible non-word level, but we will see
+
+# pickle file?????
+
 # random image of nola return too
+
+# add security key
 # cron job for flow (at end)
 
 app = Flask(__name__)
@@ -39,6 +48,7 @@ def main():
 @app.route("/tweet")
 def tweet():
     # api.update_status("Hello, World!")
+    # add a tweet under original tweet, saying "brought to you by nolabot1.herokuapp.com"
     return "Tweeted!"
 
 @app.route("/getUserTweets")
