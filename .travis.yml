@@ -1,0 +1,14 @@
+language: python
+python:
+- '3.6'
+install:
+- pip install -r requirements.txt
+script:
+- python -m unittest
+deploy:
+  provider: heroku
+  api_key:
+    secure: Aix6gwma6yqI6l24KKF+DY8bH7TpREbyOnRfcx935c1ewnrXhxfZC6jJzAhQ5xEDcFCUzPE4UCt8SpWULKiJWBS3C6ja7rgZQ1aoCa8tD555L5vKKeN1ajn/gsjjh1Llk9SwOJbwU9AM8FaB14Q64nVnfVDxMIMqZLfGLN13k1OlKFFVvqZpMHjDvZjxkHIA46RIbJZXw1FLvSDdRa5gT2mRDSTtGZqP5J9U/glnh3i9OEywiDPpIJARgCvl/7mJK4CjhA2iQkapDXqVqt9POcSz64Ra7pi5vIimJdrOXjTABDyUqeeJmbFARLZPLcCeCflqGauHQoCi8ISfpXU5oh3abDqBFGB7bhx8c6gVvECiKlfhwt44RF5Y3qBTaUaKZu5YfAchVplzMTlIDNsWhSfq6m87Nj/L25qgOTZJBWB4eSPPrQ0tsVEjy+IPqEiYb1jsQZzezVOCubiNOYx5QTd0XFeIhviIvgd7KlioB2j2Fa1WeRPl0dMYXHRpZs07mFtafF0gk/Ttqi4Y5aiHxyYPSiN5i4RWpMWJtSbq8ubIWogu8/XHgzuo0Uh2x7xCirQGNx9b+q0/NC8yRSnLji38E6y2gjo3tZNDSywXbKkYKa69ajoEK4BgTQbGg2g1Hrvi2QZzJQ/68DQEm2Hg/eaFF0df17wDp5aMcpBhma8=
+  app: nolabot1
+  on:
+    repo: geomin76/nolabot
