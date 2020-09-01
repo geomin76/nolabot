@@ -4,6 +4,10 @@ import pyAesCrypt
 import pickle
 import os
 import random
+from aitextgen.TokenDataset import TokenDataset
+from aitextgen.tokenizers import train_tokenizer
+from aitextgen.utils import GPT2ConfigCPU
+from aitextgen import aitextgen
 
 def parsingString(string):
     emoji_pattern = re.compile("["
@@ -73,3 +77,18 @@ def newRandomNumbers():
     pickle.dump(numbers, open("numbers.p", "wb"))
     bufferSize = 64 * 1024
     pyAesCrypt.encryptFile("numbers.p", "data.aes", os.environ.get('ENCRYPT'), bufferSize)
+
+def train():
+    file_name = "everyone.txt"
+    train_tokenizer(file_name)
+    vocab_file = "aitextgen-vocab.json"
+    merges_file = "aitextgen-merges.txt"
+    config = GPT2ConfigCPU()
+    ai = aitextgen(vocab_file=vocab_file, merges_file=merges_file, config=config)
+    data = TokenDataset(file_name, vocab_file=vocab_file, merges_file=merges_file, block_size=64)
+    ai.train(data, batch_size=16, num_steps=5000)
+
+def generateFromModel():
+    ai = aitextgen(model="./trained_model/pytorch_model.bin", vocab_file="./aitextgen-vocab.json", merges_file="./aitextgen-merges.txt", config="./trained_model/config.json")
+    # return ai.generate(10, return_as_list=True)
+    ai.generate(10)

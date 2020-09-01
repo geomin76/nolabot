@@ -8,3 +8,7 @@ debug.log
 *.json
 numbers.p
 fortweet.p
+thistweet.aes
+trained_model/
+aitextgen-merges.txt
+aitextgen-vocab.json

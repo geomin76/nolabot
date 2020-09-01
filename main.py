@@ -11,8 +11,8 @@ from twilio import twiml
 from datetime import datetime
 from twilio.twiml.messaging_response import MessagingResponse
 import sys
-sys.path.append('./textgenrnn')
-from textgenrnn import textgenrnn
+# sys.path.append('./textgenrnn')
+# from textgenrnn import textgenrnn
 
 # pay for actual subscription   
 
@@ -50,21 +50,16 @@ def getTweets():
     service.getTweetsHelper(user)
     return "Tweets saved on " + user + ".txt"
 
-@app.route("/generate")
+@app.route("/train")
 def generate():
     startTime = datetime.now()
-    textgen = textgenrnn()
-    textgen.train_from_file('marchahmadness.txt', new_model=True, num_epochs=300, gen_epochs=50, word_level=True)
-    textgen.generate()
+    service.train()
     print(datetime.now() - startTime)
     return "Generated tweets"
 
 @app.route("/generateFromTrained")
 def generateFromTrained():
-    textgen_2 = textgenrnn(weights_path='ahmad_textgenrnn_weights.hdf5',
-                       vocab_path='ahmad_textgenrnn_vocab.json',
-                       config_path='ahmad_textgenrnn_config.json')
-    tweet_list = textgen_2.generate(10, temperature=1.0, return_as_list=True)
+    service.generateFromModel()
     return "Returned"
 
 @app.route("/sendText")
