@@ -14,15 +14,11 @@ import sys
 sys.path.append('./textgenrnn')
 from textgenrnn import textgenrnn
 
-# do some form of checking for numbers, so no random number will text, database?
-    # and in another record, store that number every tweet push, so it can only recognize that number? and if another person tries to reply, "sorry not your turn"
 # pay for actual subscription   
 
 # rebuild model, trying to include everyone? find best way to build model
     # find ahmad's best tweets and build with everyone elses? danya, lexi, sparsh, becca, ahmad
     # build model with everyone and possible non-word level, but we will see
-
-# random image of nola return too
 
 # add security key
 # cron job for flow (at end)
@@ -64,11 +60,10 @@ def generate():
 
 @app.route("/generateFromTrained")
 def generateFromTrained():
-    # somehow rewrite textgenrnn to print to list and return instead of print to console
     textgen_2 = textgenrnn(weights_path='ahmad_textgenrnn_weights.hdf5',
                        vocab_path='ahmad_textgenrnn_vocab.json',
                        config_path='ahmad_textgenrnn_config.json')
-    textgen_2.generate(10, temperature=1.0, return_as_list=True)
+    tweet_list = textgen_2.generate(10, temperature=1.0, return_as_list=True)
     return "Returned"
 
 @app.route("/sendText")
@@ -85,10 +80,15 @@ def sms():
     message_body = request.form['Body']
     print(str(number))
     print(str(message_body))
-    resp = MessagingResponse()
-    resp.message("Thanks for texting nolabot! Cheers!")
-    print(str(resp))
-    return str(resp)
+
+    if service.checkNumber(number):
+        resp = MessagingResponse()
+        resp.message("Thanks for texting nolabot! Check out the new tweet at https://twitter.com/nolathedog1!")
+        return str(resp)
+    else:
+        resp = MessagingResponse()
+        resp.message("It's not your turn to tweet this time, sorry!")
+        return str(resp)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

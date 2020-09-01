@@ -13,6 +13,7 @@ certifi==2020.6.20
 cffi==1.14.1
 chardet==3.0.4
 click==7.1.2
+cryptography==3.1
 elasticsearch==7.8.1
 fake-useragent==0.1.11
 Flask==1.1.2
@@ -29,6 +30,7 @@ h5py==2.10.0
 idna==2.10
 idna-ssl==1.1.0
 importlib-metadata==1.7.0
+iniconfig==1.0.1
 itsdangerous==1.1.0
 Jinja2==2.11.2
 joblib==0.16.0
@@ -37,17 +39,23 @@ Keras-Applications==1.0.2
 Keras-Preprocessing==1.1.2
 Markdown==3.2.2
 MarkupSafe==1.1.1
+more-itertools==8.5.0
 multidict==4.7.6
 numpy==1.18.5
 oauthlib==3.1.0
 opt-einsum==3.3.0
+packaging==20.4
 pandas==1.1.0
+pluggy==0.13.1
 protobuf==3.12.4
+py==1.9.0
+pyAesCrypt==0.4.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycares==3.1.1
 pycparser==2.20
 PyJWT==1.7.1
+pyparsing==2.4.7
 PySocks==1.7.1
 python-dateutil==2.8.1
 pytz==2020.1
@@ -66,6 +74,7 @@ tensorflow==2.3.0
 tensorflow-estimator==2.3.0
 termcolor==1.1.0
 threadpoolctl==2.1.0
+toml==0.10.1
 tqdm==4.48.2
 tweepy==3.9.0
 twilio==6.44.2

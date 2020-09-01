@@ -55,4 +55,21 @@ def randomNumber():
     bufferSize = 64 * 1024
     pyAesCrypt.decryptFile("data.aes", "numbers.p", os.environ.get('ENCRYPT'), bufferSize)
     numbers = pickle.load(open("numbers.p", "rb"))
-    return numbers[random.randrange(len(numbers))]
+    fortweet =  numbers[random.randrange(len(numbers))]
+
+    pickle.dump(fortweet, open("fortweet.p", "wb"))
+    bufferSize = 64 * 1024
+    pyAesCrypt.encryptFile("fortweet.p", "thistweet.aes", os.environ.get('ENCRYPT'), bufferSize)
+    return fortweet
+
+def checkNumber(number):
+    bufferSize = 64 * 1024
+    pyAesCrypt.decryptFile("thistweet.aes", "fortweet.p", os.environ.get('ENCRYPT'), bufferSize)
+    temp = pickle.load(open("fortweet.p", "rb"))
+    return number == temp
+
+def newRandomNumbers():
+    numbers = [""]
+    pickle.dump(numbers, open("numbers.p", "wb"))
+    bufferSize = 64 * 1024
+    pyAesCrypt.encryptFile("numbers.p", "data.aes", os.environ.get('ENCRYPT'), bufferSize)
