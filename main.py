@@ -20,6 +20,8 @@ from textgenrnn import textgenrnn
     # find ahmad's best tweets and build with everyone elses? danya, lexi, sparsh, becca, ahmad
     # build model with everyone and possible non-word level, but we will see
 
+# parser for text coming in
+
 # add security key
 # cron job for flow (at end)
 
@@ -40,7 +42,6 @@ def main():
 @app.route("/tweet")
 def tweet():
     # api.update_status("Hello, World!")
-    # add a tweet under original tweet, saying "brought to you by nolabot1.herokuapp.com"
     return "Tweeted!"
 
 @app.route("/getUserTweets")
