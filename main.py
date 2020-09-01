@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import os
-from flask import Flask, request
+from flask import Flask, request, render_template
 import tweepy
 import twint
 import re
@@ -43,7 +43,7 @@ api = tweepy.API(auth)
 
 @app.route("/")
 def main():
-    return "Hello, World!"
+    return "Hello World"
 
 @app.route("/tweet")
 def tweet():
