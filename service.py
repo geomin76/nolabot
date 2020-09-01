@@ -1,5 +1,9 @@
 import re
 import twint
+import pyAesCrypt
+import pickle
+import os
+import random
 
 def parsingString(string):
     emoji_pattern = re.compile("["
@@ -46,3 +50,9 @@ def getTweetsHelper(user):
         if parsedStr.strip():
             file1.write(parsedStr + "\n")
     file1.close()
+
+def randomNumber():
+    bufferSize = 64 * 1024
+    pyAesCrypt.decryptFile("data.aes", "numbers.p", os.environ.get('ENCRYPT'), bufferSize)
+    numbers = pickle.load(open("numbers.p", "rb"))
+    return numbers[random.randrange(len(numbers))]

@@ -15,16 +15,12 @@ sys.path.append('./textgenrnn')
 from textgenrnn import textgenrnn
 
 # do some form of checking for numbers, so no random number will text, database?
-    # in a record, do a bunch of random numbers? and then pick one
     # and in another record, store that number every tweet push, so it can only recognize that number? and if another person tries to reply, "sorry not your turn"
 # pay for actual subscription   
-#random function to text a number for every tweet
 
 # rebuild model, trying to include everyone? find best way to build model
     # find ahmad's best tweets and build with everyone elses? danya, lexi, sparsh, becca, ahmad
     # build model with everyone and possible non-word level, but we will see
-
-# pickle file?????
 
 # random image of nola return too
 
@@ -43,7 +39,7 @@ api = tweepy.API(auth)
 
 @app.route("/")
 def main():
-    return "Hello World"
+    return render_template("main.html")
 
 @app.route("/tweet")
 def tweet():
@@ -72,11 +68,12 @@ def generateFromTrained():
     textgen_2 = textgenrnn(weights_path='ahmad_textgenrnn_weights.hdf5',
                        vocab_path='ahmad_textgenrnn_vocab.json',
                        config_path='ahmad_textgenrnn_config.json')
-    textgen_2.generate(10, temperature=1.0)
+    textgen_2.generate(10, temperature=1.0, return_as_list=True)
     return "Returned"
 
 @app.route("/sendText")
 def sendText():
+    number = service.randomNumber()
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
                        body="Welcome to Nolabot!")
@@ -89,8 +86,7 @@ def sms():
     print(str(number))
     print(str(message_body))
     resp = MessagingResponse()
-    msg = resp.message("Thanks for texting nolabot! Cheers!")
-    msg.media("https://lh3.googleusercontent.com/gq5MtvoDPqkkfW12QmxT8zmP0HuyluaxG_UvPa3A67RYo1j67rukrNjiSMk9s3bYIWxNVW7gNXdGKO6_OhaVCXsnnwBtW5faQjZOohZ4G5MMbDDAA7Ee9WIWRResbTK6Jjfff9b5IUI=w2400")
+    resp.message("Thanks for texting nolabot! Cheers!")
     print(str(resp))
     return str(resp)
 
