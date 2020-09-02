@@ -92,3 +92,16 @@ def generateFromModel():
     ai = aitextgen(model="./trained_model/pytorch_model.bin", vocab_file="./aitextgen-vocab.json", merges_file="./aitextgen-merges.txt", config="./trained_model/config.json")
     # return ai.generate(10, return_as_list=True)
     ai.generate(10)
+
+def test_train():
+    ai = aitextgen(tf_gpt2="124M")
+    file_name = "everyone.txt"
+    ai.train(file_name,
+         line_by_line=False,
+         from_cache=False,
+         num_steps=5000,
+         generate_every=1000,
+         save_every=1000,
+         learning_rate=1e-4,
+         batch_size=1, 
+         )
