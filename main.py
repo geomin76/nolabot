@@ -64,10 +64,12 @@ def generateFromTrained():
 
 @app.route("/sendText")
 def sendText():
-    number = service.randomNumber()
+    # number = service.randomNumber()
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
-                       body="Welcome to Nolabot!")
+                       body="""
+                       Welcome to Nolabot!\n1: Welcome!\n2: ok!\n3: hello!\n4: okeowko
+                       """)
     return "text"
 
 @app.route("/sms", methods=['GET', 'POST'])

@@ -86,7 +86,7 @@ def train():
     config = GPT2ConfigCPU()
     ai = aitextgen(vocab_file=vocab_file, merges_file=merges_file, config=config)
     data = TokenDataset(file_name, vocab_file=vocab_file, merges_file=merges_file, block_size=64)
-    ai.train(data, batch_size=16, num_steps=5000)
+    ai.train(data, batch_size=16, num_steps=1000)
 
 def generateFromModel():
     ai = aitextgen(model="./trained_model/pytorch_model.bin", vocab_file="./aitextgen-vocab.json", merges_file="./aitextgen-merges.txt", config="./trained_model/config.json")
