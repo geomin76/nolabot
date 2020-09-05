@@ -65,12 +65,17 @@ def generateFromTrained():
 @app.route("/sendText")
 def sendText():
     # number = service.randomNumber()
+    ls = service.generateFromModel()
+    body = "Welcome to Nolabot!\nPick your favorite tweet and reply back with the number to tweet on Nolabot!\n"
+    count = 1
+    for i in ls:
+        if len(i.strip()) != 0:
+            body += str(count) + ". " + i + "\n"
+            count += 1
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
-                       body="""
-                       Welcome to Nolabot!\n1: Welcome!\n2: ok!\n3: hello!\n4: okeowko
-                       """)
-    return "text"
+                       body=body)
+    return "Text sent"
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms():

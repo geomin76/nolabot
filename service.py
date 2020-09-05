@@ -90,8 +90,12 @@ def train():
 
 def generateFromModel():
     ai = aitextgen(model="./trained_model/pytorch_model.bin", vocab_file="./aitextgen-vocab.json", merges_file="./aitextgen-merges.txt", config="./trained_model/config.json")
-    # return ai.generate(10, return_as_list=True)
-    ai.generate(10)
+    ls = ai.generate(3, return_as_list=True, temperature=1.0)
+    temp = []
+    for i in ls:
+        for j in i.split("\r\n"):
+            temp.append(j)
+    return temp
 
 def test_train():
     ai = aitextgen(tf_gpt2="124M")
