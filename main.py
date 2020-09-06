@@ -75,6 +75,7 @@ def sendText():
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
                        body=body)
+    # write to pickle file for tweets, so when it sets back a numbered response, it tweets that response
     return "Text sent"
 
 @app.route("/sms", methods=['GET', 'POST'])
