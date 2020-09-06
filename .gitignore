@@ -12,3 +12,4 @@ thistweet.aes
 trained_model/
 aitextgen-merges.txt
 aitextgen-vocab.json
+tweets.p
