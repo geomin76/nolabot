@@ -11,6 +11,8 @@ from twilio import twiml
 from datetime import datetime
 from twilio.twiml.messaging_response import MessagingResponse
 import sys
+import pickle
+
 # sys.path.append('./textgenrnn')
 # from textgenrnn import textgenrnn
 
@@ -66,17 +68,20 @@ def generateFromTrained():
 def sendText():
     # number = service.randomNumber()
     ls = service.generateFromModel()
+    tweets = []
     body = "Welcome to Nolabot!\nPick your favorite tweet and reply back with the number to tweet on Nolabot!\n"
     count = 1
     for i in ls:
         if len(i.strip()) != 0:
             body += str(count) + ". " + i + "\n"
+            tweets.append(i)
             count += 1
+    service.createTweetsFile(tweets)
     client.messages.create(to=os.environ.get('MY_NUMBER'), 
                        from_=os.environ.get('TWILIO_NUMBER'), 
                        body=body)
-    # write to pickle file for tweets, so when it sets back a numbered response, it tweets that response
     return "Text sent"
+
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms():
@@ -84,15 +89,23 @@ def sms():
     message_body = request.form['Body']
     print(str(number))
     print(str(message_body))
+    tweets = pickle.load(open("tweets.p", "rb"))
+    print(tweets[int(message_body) - 1])
 
-    if service.checkNumber(number):
-        resp = MessagingResponse()
-        resp.message("Thanks for texting nolabot! Check out the new tweet at https://twitter.com/nolathedog1!")
-        return str(resp)
-    else:
-        resp = MessagingResponse()
-        resp.message("It's not your turn to tweet this time, sorry!")
-        return str(resp)
+    resp = MessagingResponse()
+    resp.message("Thanks for texting nolabot! Check out the new tweet at https://twitter.com/nolathedog1!")
+    return str(resp)
+
+    # api.update_status("Hello, World!")
+
+    # if service.checkNumber(number):
+    #     resp = MessagingResponse()
+    #     resp.message("Thanks for texting nolabot! Check out the new tweet at https://twitter.com/nolathedog1!")
+    #     return str(resp)
+    # else:
+    #     resp = MessagingResponse()
+    #     resp.message("It's not your turn to tweet this time, sorry!")
+    #     return str(resp)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

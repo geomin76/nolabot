@@ -78,6 +78,12 @@ def newRandomNumbers():
     bufferSize = 64 * 1024
     pyAesCrypt.encryptFile("numbers.p", "data.aes", os.environ.get('ENCRYPT'), bufferSize)
 
+def createTweetsFile(ls):
+    tweets = []
+    for i in ls:
+        tweets.append(i)
+    pickle.dump(tweets, open("tweets.p", "wb"))
+
 def train():
     file_name = "everyone.txt"
     train_tokenizer(file_name)
