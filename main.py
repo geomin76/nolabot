@@ -13,8 +13,6 @@ from twilio.twiml.messaging_response import MessagingResponse
 import sys
 import pickle
 
-# sys.path.append('./textgenrnn')
-# from textgenrnn import textgenrnn
 
 # pay for actual subscription   
 
@@ -89,16 +87,11 @@ def sms():
     message_body = request.form['Body']
     print(str(number))
     print(str(message_body))
-    tweets = pickle.load(open("tweets.p", "rb"))
-    print(tweets[int(message_body) - 1])
-
-    resp = MessagingResponse()
-    resp.message("Thanks for texting nolabot! Check out the new tweet at https://twitter.com/nolathedog1!")
-    return str(resp)
-
-    # api.update_status("Hello, World!")
 
     # if service.checkNumber(number):
+    #     tweets = pickle.load(open("tweets.p", "rb"))
+    #     print(tweets[int(message_body) - 1])
+    #     api.update_status(tweets[int(message_body) - 1])
     #     resp = MessagingResponse()
     #     resp.message("Thanks for texting nolabot! Check out the new tweet at https://twitter.com/nolathedog1!")
     #     return str(resp)

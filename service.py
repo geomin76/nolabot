@@ -4,6 +4,7 @@ import pyAesCrypt
 import pickle
 import os
 import random
+sys.path.append('./aitextgen')
 from aitextgen.TokenDataset import TokenDataset
 from aitextgen.tokenizers import train_tokenizer
 from aitextgen.utils import GPT2ConfigCPU
