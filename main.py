@@ -13,6 +13,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 import sys
 sys.path.append('./textgenrnn')
 from textgenrnn import textgenrnn
+from flask_cors import CORS, cross_origin
 
 # do some form of checking for numbers, so no random number will text, database?
     # in a record, do a bunch of random numbers? and then pick one
@@ -32,6 +33,8 @@ from textgenrnn import textgenrnn
 # cron job for flow (at end)
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # authentication for Twilio
 client = Client(os.environ.get('PHONE_KEY'), os.environ.get('PHONE_SECRET'))
@@ -81,6 +84,19 @@ def sendText():
                        from_=os.environ.get('TWILIO_NUMBER'), 
                        body="Welcome to Nolabot!")
     return "text"
+
+@app.route("/sendTextToHMadison")
+@cross_origin()
+def sendTextToHMadison():
+    data = request.get_json()
+    msg = """
+    From: {0}\n\n
+    Message: {1}
+    """.format(data["from"], data["msg"])
+    client.messages.create(to="+17037729467", 
+                       from_=os.environ.get('TWILIO_NUMBER'), 
+                       body=msg)
+    return "text"
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms():
